@@ -53,5 +53,5 @@ val AvenirMedium = TextStyle(
     fontWeight = FontWeight.Medium,
     fontSize = 14.sp,
     letterSpacing = 0.sp,
-    lineHeight = 19.sp,
+    lineHeight = 16.sp,
 )

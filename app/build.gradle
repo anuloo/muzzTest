@@ -67,6 +67,14 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.3.1'
     implementation "androidx.navigation:navigation-compose:${androidx_navigation_compose_version}"
+    implementation 'androidx.compose.material3:material3:1.1.0-alpha08'
+    implementation "androidx.compose.foundation:foundation:${compose_ui_version}"
+
+    //icon
+    implementation "androidx.compose.material:material-icons-extended:${compose_ui_version}"
+
+    // Coil
+    implementation "io.coil-kt:coil-compose:2.2.2"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:${androidx_hilt_version}"
