@@ -41,6 +41,7 @@ class ChatViewModel @Inject constructor(
                             _messages + MessageRegister(it, false) //  user
                         }
                     }
+
                     val groupedList = _messages.sortedBy { it.chatMessage.timeStamp }.groupBy {
                         it.chatMessage.dateTime
                     }

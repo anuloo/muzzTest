@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ChatRepository {
     suspend fun getAllMessages(): Flow<List<Message>>
-    suspend fun insertMessage(message:Message)
+    suspend fun insertMessage(message: Message)
 }

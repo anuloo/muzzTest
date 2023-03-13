@@ -8,16 +8,16 @@ import com.example.muztest.domain.model.Message
 @Entity(tableName = "messages")
 data class MessageEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Long?=null,
+    @ColumnInfo(name = "id") val id: Long? = null,
     @ColumnInfo(name = "message") val message: String,
     @ColumnInfo(name = "userName") val userName: String,
     @ColumnInfo(name = "timeStamp") val timeStamp: Long,
     @ColumnInfo(name = "dateTime") val dateTime: String
 )
 
-fun MessageEntity.toDomain():Message = Message(
+fun MessageEntity.toDomain(): Message = Message(
     id = id,
-    message= message,
+    message = message,
     userName = userName,
     timeStamp = timeStamp,
     dateTime = dateTime

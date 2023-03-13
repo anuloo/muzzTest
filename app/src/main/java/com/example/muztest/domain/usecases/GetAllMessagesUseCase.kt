@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetAllMessagesUseCase @Inject constructor(
     private val repository: ChatRepository,
     private val dispatchProvider: DispatchProvider
-){
+) {
     suspend operator fun invoke(): Flow<List<Message>> {
         return withContext(dispatchProvider.io) {
             repository.getAllMessages()
