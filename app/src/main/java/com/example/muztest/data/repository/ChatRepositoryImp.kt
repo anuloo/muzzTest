@@ -22,6 +22,6 @@ class ChatRepositoryImp @Inject constructor(
     }
 
     override suspend fun insertMessage(message: Message) {
-       db.muzzDao.insertMessage(message.toEntity())
+        db.muzzDao.insertMessage(message.toEntity())
     }
 }

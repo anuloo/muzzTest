@@ -11,12 +11,14 @@ data class MessageEntity(
     @ColumnInfo(name = "id") val id: Long?=null,
     @ColumnInfo(name = "message") val message: String,
     @ColumnInfo(name = "userName") val userName: String,
-    @ColumnInfo(name = "timeStamp") val timeStamp: Long
+    @ColumnInfo(name = "timeStamp") val timeStamp: Long,
+    @ColumnInfo(name = "dateTime") val dateTime: String
 )
 
 fun MessageEntity.toDomain():Message = Message(
     id = id,
     message= message,
     userName = userName,
-    timeStamp = timeStamp
+    timeStamp = timeStamp,
+    dateTime = dateTime
 )

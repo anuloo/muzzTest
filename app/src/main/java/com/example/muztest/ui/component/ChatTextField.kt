@@ -50,7 +50,6 @@ internal fun ChatTextField(
                     color = if (textEmpty) PrimaryVariantColor else PrimaryColor,
                     shape = MaterialTheme.shapes.extraLarge
                 ),
-                //.onFocusChanged { focusState -> hasFocus = focusState.hasFocus },
             value = input,
             textStyle = AvenirMedium,
             onValueChange = { input = it },
@@ -67,10 +66,10 @@ internal fun ChatTextField(
                 .background(if (textEmpty) PrimaryVariantColor else PrimaryColor, CircleShape)
                 .align(CenterVertically),
             onClick = {
-               if(!textEmpty){
-                   onMessageSend(input.text)
-                   input = TextFieldValue("")
-               }
+                if (!textEmpty) {
+                    onMessageSend(input.text)
+                    input = TextFieldValue("")
+                }
             }) {
             Icon(
                 imageVector = Icons.Filled.Send,

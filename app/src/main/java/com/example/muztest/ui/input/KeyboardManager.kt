@@ -22,7 +22,7 @@ class KeyBoardManager(context: Context) {
             val screenHeight = rootView.rootView.height
             val keypadHeight = screenHeight - r.bottom
             if (keypadHeight > screenHeight * 0.15) {
-                // 0.15 ratio is right enough to determine keypad height.
+                // 0.15 ratio is right enough to determine keypad height can be ajusted later.
                 isKeyboardClosed = false
             } else if (!isKeyboardClosed) {
                 isKeyboardClosed = true

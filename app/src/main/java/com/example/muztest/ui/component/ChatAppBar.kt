@@ -24,7 +24,6 @@ import com.example.muztest.ui.theme.PrimaryColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatAppBar(
-    modifier: Modifier = Modifier,
     context: Context,
     title: String = "Sarah",
     onUserProfilePictureClick: (() -> Unit)? = null,
