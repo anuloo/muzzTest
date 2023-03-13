@@ -26,3 +26,17 @@ Also added an extra class for MessageRegister to differeciate between sender and
 For start a nice firebase db instead the local one so it becames a real chat app.
 On the same note using socket would be needed.
 
+#### MuzzTest App Screenshots
+
+<table>
+  <tr>
+    <td>With User 1 (Sarah)</td>
+     <td>Keyboard up</td>
+     <td>With User 2 (Max)</td>
+  </tr>
+  <tr>
+    <td><img src="/assets/screenshots/Screenshot_1.jpg" width=400></td>
+    <td><img src="/assets/screenshots/Screenshot_2.jpg" width=400></td>
+    <td><img src="/assets/screenshots/Screenshot_3.jpg" width=400></td>
+  </tr>
+ </table>
