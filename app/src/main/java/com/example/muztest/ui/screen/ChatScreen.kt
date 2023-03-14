@@ -29,6 +29,7 @@ import com.example.muztest.ui.component.ReceiveMessageRow
 import com.example.muztest.ui.component.SentMessageRow
 import com.example.muztest.ui.theme.AvenirMedium
 import com.example.muztest.ui.theme.spacing
+import com.example.muztest.utils.millis
 import com.example.muztest.utils.sdf
 import kotlinx.coroutines.delay
 
@@ -40,6 +41,7 @@ fun ChatScreen(
     keyboardController: SoftwareKeyboardController
 ) {
     val getAllMessages by viewModel.getAllMessages.collectAsState(initial = emptyList())
+    val lastMessage by viewModel.lastMessage.collectAsState(null)
     val context = LocalContext.current
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = getAllMessages.size)
 
@@ -70,16 +72,17 @@ fun ChatScreen(
             onSendMessage = {
                 viewModel.sendMessage(it)
             },
-            scrollState = scrollState
+            scrollState = scrollState,
+            lastMessage = lastMessage
         )
     }
-
 }
 
 @Composable
 fun ChatScreenView(
     modifier: Modifier = Modifier,
     messages: List<MessageWithDateSectionUi>,
+    lastMessage: Message?,
     context: Context,
     onSendMessage: (Message) -> Unit,
     scrollState: LazyListState? = null,
@@ -88,6 +91,12 @@ fun ChatScreenView(
     var updateUser by remember {
         mutableStateOf(currentUser)
     }
+
+    var lastMessageTimeStamp by remember {
+        val lastMessageDate = lastMessage?.timeStamp ?: System.currentTimeMillis()
+        mutableStateOf(lastMessageDate)
+    }
+
 
     Column(
         modifier
@@ -143,7 +152,9 @@ fun ChatScreenView(
                     message = it,
                     userName = updateUser.name,
                     timeStamp = System.currentTimeMillis(),
-                    dateTime = sdf.format(System.currentTimeMillis())
+                    dateTime = sdf.format(
+                        checkDate(lastMessageTimeStamp)
+                    )
                 )
 
 
@@ -155,8 +166,28 @@ fun ChatScreenView(
 
 }
 
+private fun checkDate(lastDate: Long = System.currentTimeMillis()): Long {
+    val currentDate: Long = System.currentTimeMillis()
+    return if (currentDate >= lastDate + millis) {
+        currentDate
+    } else {
+        lastDate
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun ChatScreenViewPreview() {
-    ChatScreenView(messages = emptyList(), context = LocalContext.current, onSendMessage = {})
+    ChatScreenView(
+        messages = emptyList(),
+        context = LocalContext.current,
+        onSendMessage = {},
+        lastMessage = Message(
+            id = 72344343,
+            message = "balala",
+            userName = "bob",
+            timeStamp = 342352353625,
+            dateTime = ""
+        )
+    )
 }

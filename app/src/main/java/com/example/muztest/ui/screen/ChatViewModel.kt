@@ -23,6 +23,10 @@ class ChatViewModel @Inject constructor(
         MutableStateFlow(emptyList())
     val getAllMessages: Flow<List<MessageWithDateSectionUi>> = _getAllMessages
 
+    private val _lastMessage: MutableStateFlow<Message?> =
+        MutableStateFlow(null)
+    val lastMessage: Flow<Message?> = _lastMessage
+
     private var _messages: List<MessageRegister> by mutableStateOf(listOf())
 
     init {
@@ -34,6 +38,7 @@ class ChatViewModel @Inject constructor(
             try {
                 useCases.getAllMessagesUseCase().collect { list ->
                     _messages = listOf()
+                    _lastMessage.value = list.last()
                     list.forEach {
                         _messages = if (it.userName == User.UserTwo.name) {
                             _messages + MessageRegister(it, true) // opposite user
