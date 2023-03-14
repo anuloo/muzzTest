@@ -22,6 +22,11 @@ By tapping on the user profile you can toggle between sender and receiver to fak
 I've used a sealed class to section the date and the message data
 Also added an extra class for MessageRegister to differeciate between sender and receiver.
 
+#### Bugs
+
+List is not scrollable until its overflow the app boundary
+Message not visible when keyboard up due to have not enough message to scroll to
+
 #### TODO
 For start a nice firebase db instead the local one so it becames a real chat app.
 On the same note using socket would be needed.
