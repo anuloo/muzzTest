@@ -31,7 +31,9 @@ import com.example.muztest.ui.theme.AvenirMedium
 import com.example.muztest.ui.theme.spacing
 import com.example.muztest.utils.millis
 import com.example.muztest.utils.sdf
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -44,6 +46,8 @@ fun ChatScreen(
     val lastMessage by viewModel.lastMessage.collectAsState(null)
     val context = LocalContext.current
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = getAllMessages.size)
+
+    val scope = rememberCoroutineScope()
 
     LaunchedEffect(getAllMessages) {
         viewModel.getAllMessages()
@@ -70,7 +74,11 @@ fun ChatScreen(
             messages = getAllMessages,
             context = context,
             onSendMessage = {
-                viewModel.sendMessage(it)
+                scope.launch {
+                    viewModel.sendMessage(it)
+                    viewModel.getAllMessages()
+                }
+
             },
             scrollState = scrollState,
             lastMessage = lastMessage
