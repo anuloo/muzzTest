@@ -98,7 +98,6 @@ fun ChatScreenView(
             context = context,
             title = updateUser.name,
             onUserProfilePictureClick = {
-                println("crap")
                 updateUser = if (updateUser == User.UserOne) {
                     User.UserTwo
                 } else {
