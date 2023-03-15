@@ -35,6 +35,7 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 useCases.getAllMessagesUseCase().collect { list ->
+                    _lastMessage.value = list.last()
                     var messages :  List<MessageRegister> = listOf()
                     list.map {
                         messages = if (it.userName == User.UserTwo.name) {
@@ -56,8 +57,6 @@ class ChatViewModel @Inject constructor(
                             MessageWithDateSectionUi.Item(it)
                         })
                     }
-
-                    _lastMessage.value = list.last()
                     _getAllMessages.value = uiList
                 }
 
