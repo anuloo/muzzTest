@@ -14,7 +14,6 @@ import com.example.muztest.domain.usecases.ChatUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -23,12 +22,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    @Singleton
     @Provides
-    fun provideDispatcherProviders(): DispatchProvider =
-        DispatchProviderImp()
+    @Singleton
+    fun provideDispatcherProviders(): DispatchProvider = DispatchProviderImp()
 
     @Provides
+    @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context,
     ): MuzzDatabase {
@@ -42,6 +41,7 @@ class AppModule {
     }
 
     @Provides
+    @Singleton
     fun provideChatRepository(
         db : MuzzDatabase
     ):ChatRepository{
@@ -51,12 +51,13 @@ class AppModule {
     }
 
     @Provides
+    @Singleton
     fun provideUseCases(
         repository: ChatRepository,
-        dispatchProvider: DispatchProvider
-    ):ChatUseCase = ChatUseCase(
-        getAllMessagesUseCase = GetAllMessagesUseCase(repository, dispatchProvider),
-        sendMessageUseCaseUseCase = SendMessageUseCase(repository,dispatchProvider)
-    )
-
+        dispatchProvider: DispatchProvider,
+    ):ChatUseCase{
+        return ChatUseCase(
+            getAllMessagesUseCase = GetAllMessagesUseCase(repository, dispatchProvider),
+            sendMessageUseCaseUseCase = SendMessageUseCase(repository,dispatchProvider))
+    }
 }

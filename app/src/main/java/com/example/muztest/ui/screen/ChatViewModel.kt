@@ -27,8 +27,6 @@ class ChatViewModel @Inject constructor(
         MutableStateFlow(null)
     val lastMessage: Flow<Message?> = _lastMessage
 
-    private var _messages: List<MessageRegister> by mutableStateOf(listOf())
-
     init {
         getAllMessages()
     }
@@ -37,17 +35,16 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 useCases.getAllMessagesUseCase().collect { list ->
-                    _messages = listOf()
-                    _lastMessage.value = list.last()
-                    list.forEach {
-                        _messages = if (it.userName == User.UserTwo.name) {
-                            _messages + MessageRegister(it, true) // opposite user
+                    var messages :  List<MessageRegister> = listOf()
+                    list.map {
+                        messages = if (it.userName == User.UserTwo.name) {
+                            messages + MessageRegister(it, true) // opposite user
                         } else {
-                            _messages + MessageRegister(it, false) //  user
+                            messages + MessageRegister(it, false) //  user
                         }
                     }
 
-                    val groupedList = _messages.sortedBy { it.chatMessage.timeStamp }.groupBy {
+                    val groupedList = messages.sortedBy { it.chatMessage.timeStamp }.groupBy {
                         it.chatMessage.dateTime
                     }
 
@@ -60,7 +57,7 @@ class ChatViewModel @Inject constructor(
                         })
                     }
 
-
+                    _lastMessage.value = list.last()
                     _getAllMessages.value = uiList
                 }
 

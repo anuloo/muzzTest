@@ -24,10 +24,10 @@ import com.example.muztest.ui.theme.PrimaryColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatAppBar(
-    context: Context,
     title: String = "Sarah",
     onUserProfilePictureClick: (() -> Unit)? = null,
 ) {
+    val context = LocalContext.current
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.White,
@@ -108,7 +108,5 @@ fun ChatAppBar(
 @Preview(showBackground = true)
 @Composable
 fun ChatAppBarPreview() {
-    ChatAppBar(
-        context = LocalContext.current
-    )
+    ChatAppBar()
 }

@@ -44,14 +44,11 @@ fun ChatScreen(
 ) {
     val getAllMessages by viewModel.getAllMessages.collectAsState(initial = emptyList())
     val lastMessage by viewModel.lastMessage.collectAsState(null)
-    val context = LocalContext.current
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = getAllMessages.size)
 
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(getAllMessages) {
-        viewModel.getAllMessages()
-        delay(200)
         if (getAllMessages.isNotEmpty()) {
             scrollState.scrollToItem(
                 index = getAllMessages.size - 1
@@ -72,10 +69,10 @@ fun ChatScreen(
 
         ChatScreenView(
             messages = getAllMessages,
-            context = context,
             onSendMessage = {
                 scope.launch {
                     viewModel.sendMessage(it)
+                    delay(200)
                     viewModel.getAllMessages()
                 }
 
@@ -91,7 +88,6 @@ fun ChatScreenView(
     modifier: Modifier = Modifier,
     messages: List<MessageWithDateSectionUi>,
     lastMessage: Message?,
-    context: Context,
     onSendMessage: (Message) -> Unit,
     scrollState: LazyListState? = null,
     currentUser: User = User.UserOne
@@ -105,14 +101,12 @@ fun ChatScreenView(
         mutableStateOf(lastMessageDate)
     }
 
-
     Column(
         modifier
             .fillMaxSize()
             .padding(horizontal = MaterialTheme.spacing.medium)
     ) {
         ChatAppBar(
-            context = context,
             title = updateUser.name,
             onUserProfilePictureClick = {
                 updateUser = if (updateUser == User.UserOne) {
@@ -188,7 +182,6 @@ private fun checkDate(lastDate: Long = System.currentTimeMillis()): Long {
 fun ChatScreenViewPreview() {
     ChatScreenView(
         messages = emptyList(),
-        context = LocalContext.current,
         onSendMessage = {},
         lastMessage = Message(
             id = 72344343,
