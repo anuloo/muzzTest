@@ -22,3 +22,11 @@ fun MessageEntity.toDomain(): Message = Message(
     timeStamp = timeStamp,
     dateTime = dateTime
 )
+
+fun Message.toEntity():MessageEntity = MessageEntity(
+    id = id,
+    message= message,
+    userName = userName,
+    timeStamp = timeStamp,
+    dateTime = dateTime
+)

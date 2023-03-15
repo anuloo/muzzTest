@@ -8,7 +8,7 @@ View models transform model information into values that can be displayed on a v
 
 Clean Architecture with 3 separated layers: data, domain, presentation(ui)
 - Dagger Hilt
-- Courountine
+- Coroutine
 - MVVM + Kotlin flow
 - Jetpack compose
 - Navigation component
@@ -16,11 +16,6 @@ Clean Architecture with 3 separated layers: data, domain, presentation(ui)
 ### Usage
 
 By tapping on the user profile you can toggle between sender and receiver to fake the send receive funcionality.
-
-#### Tricks and tips
-
-I've used a sealed class to section the date and the message data
-Also added an extra class for MessageRegister to differeciate between sender and receiver.
 
 #### Bugs
 
