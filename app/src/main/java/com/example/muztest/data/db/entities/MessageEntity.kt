@@ -10,9 +10,9 @@ data class MessageEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long? = null,
     @ColumnInfo(name = "message") val message: String,
-    @ColumnInfo(name = "userName") val userName: String,
-    @ColumnInfo(name = "timeStamp") val timeStamp: Long,
-    @ColumnInfo(name = "dateTime") val dateTime: String
+    @ColumnInfo(name = "user_name") val userName: String,
+    @ColumnInfo(name = "time_stamp") val timeStamp: Long,
+    @ColumnInfo(name = "date_time") val dateTime: String
 )
 
 fun MessageEntity.toDomain(): Message = Message(

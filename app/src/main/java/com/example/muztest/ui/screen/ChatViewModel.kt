@@ -1,8 +1,5 @@
 package com.example.muztest.ui.screen
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.muztest.domain.model.Message
@@ -19,9 +16,9 @@ import javax.inject.Inject
 class ChatViewModel @Inject constructor(
     private val useCases: ChatUseCase
 ) : ViewModel() {
-    private val _getAllMessages: MutableStateFlow<List<MessageWithDateSectionUi>> =
+    private val _allMessages: MutableStateFlow<List<MessageWithDateSectionUi>> =
         MutableStateFlow(emptyList())
-    val getAllMessages: Flow<List<MessageWithDateSectionUi>> = _getAllMessages
+    val allMessages: Flow<List<MessageWithDateSectionUi>> = _allMessages
 
     private val _lastMessage: MutableStateFlow<Message?> =
         MutableStateFlow(null)
@@ -57,7 +54,7 @@ class ChatViewModel @Inject constructor(
                             MessageWithDateSectionUi.Item(it)
                         })
                     }
-                    _getAllMessages.value = uiList
+                    _allMessages.value = uiList
                 }
 
             } catch (e: Throwable) {

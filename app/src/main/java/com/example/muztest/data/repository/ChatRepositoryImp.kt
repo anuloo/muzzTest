@@ -2,8 +2,8 @@ package com.example.muztest.data.repository
 
 import com.example.muztest.data.db.MuzzDatabase
 import com.example.muztest.data.db.entities.toDomain
+import com.example.muztest.data.db.entities.toEntity
 import com.example.muztest.domain.model.Message
-import com.example.muztest.domain.model.toEntity
 import com.example.muztest.domain.repository.ChatRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest

@@ -1,6 +1,5 @@
 package com.example.muztest.ui.screen
 
-import android.content.Context
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -16,7 +15,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +29,6 @@ import com.example.muztest.ui.theme.AvenirMedium
 import com.example.muztest.ui.theme.spacing
 import com.example.muztest.utils.millis
 import com.example.muztest.utils.sdf
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -42,7 +39,7 @@ fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel(),
     keyboardController: SoftwareKeyboardController
 ) {
-    val getAllMessages by viewModel.getAllMessages.collectAsState(initial = emptyList())
+    val getAllMessages by viewModel.allMessages.collectAsState(initial = emptyList())
     val lastMessage by viewModel.lastMessage.collectAsState(null)
     val scrollState = rememberLazyListState(initialFirstVisibleItemIndex = getAllMessages.size)
 
@@ -135,7 +132,7 @@ fun ChatScreenView(
                             )
                         }
                         is MessageWithDateSectionUi.Item -> {
-                            when (chat.message.isMessageFromOpponent) {
+                            when (chat.message.isMessageFromOtherUser) {
                                 true -> {
                                     ReceiveMessageRow(text = chat.message.chatMessage.message)
                                 }
